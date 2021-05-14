@@ -18,6 +18,7 @@ class Main extends Component {
 
   
   onDishSelect(dishId){
+    //console.log(dishId);
     this.setState({ selectedDish: dishId});
 }
 
@@ -35,7 +36,7 @@ class Main extends Component {
             onClick={(dishId) => this.onDishSelect(dishId)} />
             </div>
             <div className="row">
-            <DishDetail dish={this.state.dishes.filter((dish) => dish.id == this.state.selectedDish )[0]} />
+            <DishDetail dish={this.state.dishes.filter((dish) => dish.id === this.state.selectedDish )[0]} />
             </div>
         </div>
     </div>
@@ -44,3 +45,4 @@ class Main extends Component {
 }
 
 export default Main;
+
