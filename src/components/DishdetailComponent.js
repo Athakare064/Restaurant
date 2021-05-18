@@ -58,9 +58,11 @@ import { Card, CardImg,CardText, CardBody, CardTitle } from 'reactstrap';
         
         if(currentdish != null){
         return (
+            <div className="container">
             <div className="row m-1">
                 <RenderDish dish={props.dish}/>
                 <RenderComments commentarray={props.dish.comments} />
+            </div>
             </div>
         );
         }

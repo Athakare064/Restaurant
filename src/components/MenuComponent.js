@@ -31,9 +31,6 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 're
             <div className="row">
                     {menu}
             </div>
-            <div className="row">
-              
-            </div>
         </div>
     );
    }
