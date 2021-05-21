@@ -10,6 +10,7 @@ import { Redirect, Route, Switch } from 'react-router';
 import Home from './HomeComponent';
 import Contact from './ContactComponent';
 import DishDetail from './DishdetailComponent';
+import About from './AboutComponent';
 
 class Main extends Component {
 
@@ -45,6 +46,12 @@ class Main extends Component {
         );
     }
 
+    const Aboutus = () => {
+      return(
+        <About leaders={this.state.leaders}/>
+      );
+  }
+
   return (
     <div>
       <Header/>
@@ -53,6 +60,7 @@ class Main extends Component {
         <Route exact path="/menu" component={() => <Menu dishes={this.state.dishes}/>}/>
         <Route path="/menu/:dishId" component={DishWithId} />
         <Route exact path="/contactus" component={Contact}/>
+        <Route exact path="/aboutus" component={Aboutus}/>
         <Redirect to="/home" />
       </Switch>
       <Footer/>
