@@ -21,8 +21,8 @@ class CommentForm extends Component {
           });
       }
       handleSubmit(values) {
-        console.log(values)
         this.toggleModal();
+        this.props.addComment(this.props.dishId,values.rating,values.author,values.comment);
     }
       render() {
         return (
@@ -112,26 +112,25 @@ class CommentForm extends Component {
         }
     }
 
-    function RenderComments({commentarray}){
-        if(commentarray != null){
-        let i = 1;
-            let arr = commentarray.map((currentcomment)=>{
-                return (
-                    <div>
-                        <div> {i++}. {currentcomment.comment}</div>
-                        <br />
-                        <div>--by {currentcomment.author} , {new Intl.DateTimeFormat('en-us',{ year: 'numeric',month:'short',day:'2-digit'}).format(new Date(Date.parse(currentcomment.date)))}</div>
-                        <br />
+    function RenderComments({comments,addComment,dishId}){
+        if(comments != null){
+                return(
+                    <div className="col-12 col-md-5 m-1">
+                    <h4>Comments</h4>
+                    <ul className="list-unstyled">
+                        {comments.map((comment) => {
+                            return(
+                                <li key={comment.id}>
+                                <p>{comment.comment}</p>
+                                <p>-- {comment.author} ,{new Intl.DateTimeFormat('en-us',{ year: 'numeric',month:'short',day:'2-digit'}).format(new Date(Date.parse(comment.date)))} </p>
+                                </li>
+                            );
+                        })}
+                    </ul>
+                    <CommentForm dishId={dishId} addComment={addComment}/>
                     </div>
                 );
-               
-            });
-
-            return(
-                <div>
-                {arr}
-                </div>
-            );
+            
 
         }
         else{
@@ -160,11 +159,9 @@ class CommentForm extends Component {
             </div>
                 <div className="row m-1">
                     <RenderDish dish={props.dish}/>
-                    <div className="col-12 col-md-5">
-                    <h4>Comments</h4>
-                    <RenderComments commentarray={props.comments} />
-                    <CommentForm dishId={props.dish}/>
-                    </div>
+                    <RenderComments comments={props.comments} 
+                        addComment={props.addComment}
+                        dishId={props.dish.id}/>
                 </div>
             </div>
         );
